@@ -22,7 +22,7 @@ const CropImg = ({ left, top, bottom, right, label, parent }) => {
   return (
     <div>
       <div style={myStyle}>
-        <h1>{label}</h1>
+        <h2>{label.toUpperCase()}</h2>
       </div>
     </div>
   );
