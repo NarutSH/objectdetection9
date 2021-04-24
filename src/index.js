@@ -7,12 +7,10 @@ import { HashRouter as Router } from "react-router-dom";
 import { ToastProvider } from "react-toast-notifications";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ToastProvider placement="bottom-center">
-      <Router hashType="noslash">
-        <App />
-      </Router>
-    </ToastProvider>
-  </React.StrictMode>,
+  <ToastProvider placement="bottom-center">
+    <Router hashType="noslash">
+      <App />
+    </Router>
+  </ToastProvider>,
   document.getElementById("root")
 );

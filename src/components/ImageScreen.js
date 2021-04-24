@@ -50,13 +50,11 @@ const ImageScreen = () => {
     ],
   };
 
-  const fetching = async () => {
-    await objDetect
+  const fetching = () => {
+    objDetect
       .post("/object-detection", data)
-      .then((res) => {
-        setResult(res);
-      })
-      .catch((error) => console.log(error.message, "💥💥💥 "));
+      .then((res) => setResult(res))
+      .catch((error) => console.error(error.message, "💥💥💥 "));
   };
 
   useEffect(() => {
@@ -74,7 +72,6 @@ const ImageScreen = () => {
         autoDismiss: true,
       });
     } catch (err) {
-      console.log(err);
       addToast(err.message, {
         appearance: "error",
         autoDismiss: true,
@@ -86,10 +83,7 @@ const ImageScreen = () => {
     const { detected_objects } = result.data;
 
     try {
-      console.log("length", detected_objects);
-      let resultPerPage = detected_objects.slice();
       displayCrop = detected_objects.map((item, index) => {
-        console.log(item);
         return (
           <CropImg
             key={index}
@@ -126,12 +120,10 @@ const ImageScreen = () => {
         );
       });
     } catch (err) {
-      console.error(err.massage);
-
       displayTableData = (
-        <p style={{ color: "red" }}>
+        <h4 style={{ color: "red" }}>
           CAN NOT DETECT ANY OBJECT <br /> <br /> PLEASE TRY ANOTHER ONE!
-        </p>
+        </h4>
       );
     }
   }
