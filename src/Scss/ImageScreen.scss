@@ -1,0 +1,42 @@
+input[type="file"] {
+  display: none;
+}
+
+.image--container {
+}
+
+.image--table {
+  width: 100%;
+  min-width: 50%;
+}
+
+.image--label {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  margin-top: 25px;
+  font-size: 18px;
+  background-color: whitesmoke;
+  color: teal;
+  box-shadow: 2px 2px 2px black;
+  border-radius: 5px;
+  &:hover {
+    background-color: teal;
+    color: white;
+  }
+}
+
+.image--result {
+  position: relative;
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
+  gap: 10px 10vw;
+  grid-template-areas: ". .";
+}
+
+#display--image {
+  box-shadow: 8px 8px 5px black;
+  border-radius: 5px;
+}

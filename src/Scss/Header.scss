@@ -1,0 +1,14 @@
+.logo {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  color: white;
+  text-shadow: 4px 4px red;
+
+  i {
+    padding-block: 10px;
+  }
+  h1 {
+    margin-top: 0;
+  }
+}

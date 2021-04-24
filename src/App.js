@@ -3,11 +3,15 @@ import Header from "./components/Header";
 import ImageScreen from "./components/ImageScreen";
 import CameraScreen from "./components/CameraScreen";
 import { Switch, Route } from "react-router-dom";
+import Menu from "./components/Menu";
 
 const App = () => {
   return (
-    <div className="">
-      <Header />
+    <div className="container-body">
+      <div className="header">
+        <Header />
+        <Menu />
+      </div>
       <Switch>
         <Route path="/" exact>
           <ImageScreen />

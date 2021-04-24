@@ -4,6 +4,7 @@ import { objDetect } from "../api/axios";
 import CropImg from "./CropImg";
 import { Progress } from "semantic-ui-react";
 import { useToasts } from "react-toast-notifications";
+import "../Scss/ImageScreen.scss";
 
 const ImageScreen = () => {
   const [pic, setPic] = useState("");
@@ -18,6 +19,22 @@ const ImageScreen = () => {
     displayCrop = "";
     displayTableData = "";
   };
+
+  const resizeFile = (file) =>
+    new Promise((resolve) => {
+      Resizer.imageFileResizer(
+        file,
+        500,
+        500,
+        "JPEG",
+        100,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        "base64"
+      );
+    });
 
   const data = {
     raw_data: pic.replace("data:image/jpeg;base64,", ""),
@@ -41,22 +58,6 @@ const ImageScreen = () => {
       })
       .catch((error) => console.log(error.message, "💥💥💥 "));
   };
-
-  const resizeFile = (file) =>
-    new Promise((resolve) => {
-      Resizer.imageFileResizer(
-        file,
-        500,
-        500,
-        "JPEG",
-        100,
-        0,
-        (uri) => {
-          resolve(uri);
-        },
-        "base64"
-      );
-    });
 
   useEffect(() => {
     fetching();
@@ -83,7 +84,10 @@ const ImageScreen = () => {
 
   if (result.data) {
     const { detected_objects } = result.data;
+
     try {
+      console.log("length", detected_objects);
+      let resultPerPage = detected_objects.slice();
       displayCrop = detected_objects.map((item, index) => {
         console.log(item);
         return (
@@ -145,8 +149,12 @@ const ImageScreen = () => {
   );
 
   return (
-    <div className="container-screen">
-      <div className="container--image">
+    <div className="image--container">
+      <label className="image--label">
+        <input type="file" accept="image/*" onChange={loadFile} />
+        <i className="upload icon large" /> Select your image
+      </label>
+      <div className="image--result">
         <div>
           {pic.length ? (
             <img src={pic} alt="pic" id="display--image" />
@@ -155,12 +163,8 @@ const ImageScreen = () => {
           )}
           {displayCrop}
         </div>
-        <div>{pic.length ? displayTable : ""}</div>
+        <div className="image--table">{pic.length ? displayTable : ""}</div>
       </div>
-      <label className="container--label">
-        <input type="file" accept="image/*" onChange={loadFile} />
-        <i className="upload icon large" /> Select your image
-      </label>
     </div>
   );
 };

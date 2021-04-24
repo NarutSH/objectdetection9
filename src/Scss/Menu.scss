@@ -1,0 +1,20 @@
+.menu-container {
+  margin-block: 1em;
+
+  ul {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.menu-item {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5em;
+  color: teal;
+  margin-right: 3em;
+  &:hover {
+    background-color: teal;
+    color: white;
+  }
+}
